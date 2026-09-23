@@ -29,10 +29,10 @@ for chunk in streamRes:
 
 # 4. 组合链
 r2 = RunnableLambda(lambda x: x * 2)
-combinedChain = r1 | r2  # 串行
+serialChain = r1 | r2  # 串行
 
-combinedRes = combinedChain.invoke(2)
-print(f"combinedRes: {combinedRes}")
+serialRes = serialChain.invoke(2)
+print(f"serialRes: {serialRes}")
 
 # 5.并行运行
 parallelChain = RunnableParallel(r1=r1, r2=r2)
@@ -40,3 +40,71 @@ parallelChain = RunnableParallel(r1=r1, r2=r2)
 # max_concurrency: 最大并发数
 parallelRes = parallelChain.batch([1, 2, 3, 4], config={'max_concurrency': 1})
 print(f"parallelRes: {parallelRes}")
+
+graphChain = serialChain | parallelChain
+graphChain.get_graph().print_ascii() # 打印链的图像描述
+
+print(f"graphRes: {graphChain.invoke(2)}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
