@@ -20,8 +20,12 @@ def on_end(run_obj: Run):
     print('r1结束的时间： ', run_obj.end_time)
 
 
+def on_error(run_obj: Run):
+    print(f"❌ 出错了！异常类型: {type(run_obj.error).__name__}, 详情: {run_obj.error}")
+
+
 r1 = RunnableLambda(test4)
 
-chain = r1.with_listeners(on_start=on_start, on_end=on_end)
+chain = r1.with_listeners(on_start=on_start, on_end=on_end, on_error=on_error)
 resp = chain.invoke(10)
 print(f"resp: {resp}")
