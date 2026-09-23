@@ -28,6 +28,7 @@ r1 = RunnableLambda(test3)
 # 每次重试之间加等待（指数退避：1s, 2s, 4s, 8s...）
 case3 = r1.with_retry(
     stop_after_attempt=4,
+    retry_if_exception_type=(ZeroDivisionError, TimeoutError, ConnectionError),
     wait_exponential_jitter=True  # 随机抖动，避免重试时间相同
 )
 print(f"case3.invoke(2): {case3.invoke(2)}")
