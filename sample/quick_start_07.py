@@ -42,13 +42,19 @@ chains = {
 }
 chains['default'] = ChatPromptTemplate.from_template(DEFAULT_TEMPLATE) | llm | StrOutputParser()
 
+
 # ==========================================
 # ③ 工厂函数：生成条件闭包
 # ==========================================
 def make_condition(keywords):
+    print(f"make_condition -> {keywords}")
+
     def condition(input):
+        print(f"condition -> {input}")
         return any(kw in input['type'] for kw in keywords)
+
     return condition
+
 
 # ==========================================
 # ④ RunnableBranch：前面全是 (条件, chain) tuple，最后一个非 tuple 是 default
