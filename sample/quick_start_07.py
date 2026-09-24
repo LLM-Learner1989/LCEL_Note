@@ -37,8 +37,8 @@ DEFAULT_TEMPLATE = (
 # ② 用循环自动创建所有 chain（末尾统一加 StrOutputParser）
 # ==========================================
 chains = {
-    name: ChatPromptTemplate.from_template(cfg['template']) | llm | StrOutputParser()
-    for name, cfg in EXPERTS.items()
+    name: ChatPromptTemplate.from_template(expert['template']) | llm | StrOutputParser()
+    for name, expert in EXPERTS.items()
 }
 chains['default'] = ChatPromptTemplate.from_template(DEFAULT_TEMPLATE) | llm | StrOutputParser()
 
