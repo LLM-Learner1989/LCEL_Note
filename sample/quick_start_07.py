@@ -54,7 +54,7 @@ def make_condition(keywords):
 # ④ RunnableBranch：前面全是 (条件, chain) tuple，最后一个非 tuple 是 default
 # ==========================================
 branch = RunnableBranch(
-    *[(make_condition(cfg['keywords']), chains[name]) for name, cfg in EXPERTS.items()],
+    *[(make_condition(expert['keywords']), chains[name]) for name, expert in EXPERTS.items()],
     chains['default']
 )
 
