@@ -10,7 +10,8 @@ r2 = RunnableLambda(lambda x: [x] * 2)
 
 branch = RunnableBranch(
     (lambda x: x > 12, r2),  # tuple → 条件分支 1
-    RunnableLambda(lambda x: {'key': x}),  # 非 tuple → default 兜底
+    # RunnableLambda(lambda x: {'key': x}),  # 非 tuple → default 兜底
+    RunnableLambda(lambda x: x)
 )
 
 chain = r1 | branch
